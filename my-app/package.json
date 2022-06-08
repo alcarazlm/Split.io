@@ -1,0 +1,87 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/plugin-syntax-jsx": "^7.16.7",
+    "@babel/preset-react": "^7.17.12",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/pickers": "^3.3.10",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.7.0",
+    "@popperjs/core": "^2.11.5",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^13.5.0",
+    "ajv": "^8.11.0",
+    "ajv-formats": "^2.1.1",
+    "axios": "^0.24.0",
+    "bootstrap": "^5.1.3",
+    "canvas-to-image": "^2.2.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-session": "^1.17.2",
+    "firebase": "^8.10.1",
+    "firebase-firestore-lite": "^1.0.3",
+    "i": "^0.3.7",
+    "image-to-blob": "^0.2.0",
+    "intl-tel-input": "^17.0.16",
+    "mdb-react-ui-kit": "^3.0.0",
+    "mongoose": "^6.3.3",
+    "multer": "^1.4.4",
+    "npm": "^8.9.0",
+    "popper.js": "^1.16.1",
+    "pure-react-carousel": "^1.28.1",
+    "react": "^18.1.0",
+    "react-beautiful-dnd": "^13.1.0",
+    "react-bootstrap": "^2.4.0",
+    "react-confetti": "^6.1.0",
+    "react-dom": "^18.1.0",
+    "react-elastic-carousel": "^0.11.5",
+    "react-modal": "^3.15.1",
+    "react-native-autosize-image": "^0.1.3",
+    "react-native-fs": "^2.20.0",
+    "react-native-make-it-rain": "^1.1.1",
+    "react-native-web": "^0.17.7",
+    "react-paypal-button-v2": "^2.6.3",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "react-use-window-size": "^1.0.1",
+    "source-map-loader": "^3.0.1",
+    "styled-components": "^5.3.5",
+    "tesseract.js": "^2.1.5",
+    "twilio": "^3.77.2",
+    "typescript": "^4.7.3",
+    "uuidv4": "^6.2.13",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:3000/",
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

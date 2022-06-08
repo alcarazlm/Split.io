@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css?family=Cairo');
+
+
+
+.title {
+  font-family: "Cairo";
+  background: url('./muneh.png');
+  text-align: center;
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  letter-spacing: 1px;
+  line-height:2
+}
+
+.title h1 {
+  background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+  background-size: cover;
+  color: transparent;
+  background-clip: text;
+  -moz-background-clip: text;
+  -webkit-background-clip: text;
+  text-transform: uppercase;
+  font-size: 80px;
+  margin: 10px 0;
+  font-size: auto;
+}
+
+.title ul {
+    display: flex;
+    flex-direction: row;
+    /* margin-right: ; */
+    columns: 2;
+    /* -webkit-columns: 2; */
+    /* -moz-columns: 2; */
+    justify-content: center;
+    margin: auto;
+    /* flex-wrap:wrap; */
+    list-style: none;
+    overflow-wrap: break-word;
+  }
+
+  
+
+/* CSS */
+.button-49,
+.button-49:after {
+  cursor: pointer;
+  width: auto;
+  height: 76px;
+  line-height: 78px;
+  font-size: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  background: linear-gradient(45deg, transparent 5%, #20db0fd2 5%);
+  border: 0;
+  color: #fff;
+  letter-spacing: 3px;
+  box-shadow: 6px 0px 0px #89e783;
+  outline: transparent;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-49:after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+  
+  content: 'START A SPLIT!';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #b8dfbb 3%, #52ed0b 5%, #66940a 5%);
+  text-shadow: -3px -3px 0px #b7b21b, 3px 3px 0px #1a1e1a;
+  clip-path: var(--slice-0);
+}
+
+.button-49:hover:after {
+
+  cursor: pointer;
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+html{
+  overflow-x: auto;
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: var(--slice-1);
+    transform: translate(-20px, -10px);
+  }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+  }
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: var(--slice-4);
+    transform: translate(5px, 10px);
+  }
+  70% {
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
+  90% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    clip-path: var(--slice-1);
+    transform: translate(0);
+  }
+}
+
+@media (min-width: auto) {
+  .button-49,
+  .button-49:after {
+    cursor: pointer;
+    width: auto;
+    height: 86px;
+    line-height: 88px;
+  }
+}

@@ -1,0 +1,13 @@
+ul {
+    display: flex;
+    flex-direction: row;
+    /* margin-right: ; */
+    /* columns: 2; */
+    /* -webkit-columns: 2; */
+    /* -moz-columns: 2; */
+    justify-content: center;
+    margin: auto;
+    /* flex-wrap:wrap; */
+    list-style: none;
+    overflow-wrap: break-word;
+  }

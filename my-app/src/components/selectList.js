@@ -19,6 +19,10 @@ const withLocation = Component => props => {
     return <SelectList {...props} location={location} />;
   };
 
+var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
 
 
 
@@ -41,57 +45,6 @@ class SelectList extends Component {
             isLoading: false,
             receipt_uid: '',
             itmes: [],
-            dummyData: [
-                {
-                    name: 'Cheeseburger',
-                    price: 15.99
-                },
-                {
-                    name: 'Cheese Pizza',
-                    price: 12.99
-                },
-                {
-                    name: 'Chili Cheese Dog',
-                    price: 9.99
-                },
-                {
-                    name: 'Large Soda',
-                    price: 2.99
-                },
-                {
-                    name: 'Vanilla Ice Cream',
-                    price: 3.99
-                },
-                {
-                    name: 'French Fries',
-                    price: 9.99
-                },
-            ],
-            personData: [
-                {
-                    person: 'Robert',
-                    selectedItems: [],
-                    totalPrice: 0.0,
-                },
-                {
-                    person: 'Karen',
-                    selectedItems: [],
-                    totalPrice: 0.0,
-
-                },
-                {
-                    person: 'Luis',
-                    selectedItems: [],
-                    totalPrice: 0.0,
-
-                },
-                {
-                    person: 'Josh',
-                    selectedItems: [],
-                    totalPrice: 0.0,
-
-                },
-            ],
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -230,7 +183,7 @@ class SelectList extends Component {
         this.setState({userItems: holdUserItems});
         // console.log(holdUserItems);
 
-        const { dummyData, personData, count, selectedItems, receipt } = this.state;
+        const { personData, count, selectedItems, receipt } = this.state;
         let arr = receipt.items.map((item, index) => {
 
             if (ind === index) {
@@ -344,7 +297,7 @@ class SelectList extends Component {
 //         console.log(this.state.users);
     }
     render() {
-        const { user, user_friends, users, isLoading, dummyData, personData, items, receipt } = this.state;
+        const { user, user_friends, users, isLoading, personData, items, receipt } = this.state;
         // console.log(items);
         // console.log(receipt);
 
@@ -413,7 +366,7 @@ class SelectList extends Component {
                             return (
                                 // <div key={index}>
                                     <TouchableOpacity onPress={() => this.selectionHandler(index)} style={{ marginTop: 20, height: 50, width: '80%', borderRadius: 12, backgroundColor: '#E6E6FA', justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 25, alignItems: 'center' }} key={index}>
-                                        <Text style={{ color: '#778899', fontSize: 18 }}> {item.item_name} ${item.price}</Text>
+                                        <Text style={{ color: '#778899', fontSize: 18 }}> {item.item_name} {formatter.format(item.price)}</Text>
                                         {/* <Text style={{ color: 'white', fontSize: 18 }}>{item.isSelected ? 'selected' : 'not selected'}</Text> */}
                                         <AvatarGroup>
                                         {this.state.userItems[index] ?

@@ -179,9 +179,11 @@ class ReceiptObject extends React.Component {
 
     return this.state.receipt ? (
       <div style={{alignItems: 'center'}}>
-        <h1>
-          Split.io
-        </h1>
+        <div className="content">
+          <h1>
+              Split.io
+          </h1>
+        </div>
         <h3 style={{fontSize: 36 }}>
           {this.state.receipt.location}
         </h3>

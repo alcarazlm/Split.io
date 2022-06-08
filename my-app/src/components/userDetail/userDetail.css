@@ -4,16 +4,20 @@
 
 .title {
   font-family: "Cairo";
-  background: url('./muneh.png');
+  /* background: url('./muneh.png'); */
   text-align: center;
   color: #FFF;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   letter-spacing: 1px;
   line-height:2
+}
+
+.card {
+  overflow: auto;
 }
 
 .title h1 {
@@ -24,7 +28,7 @@
   -moz-background-clip: text;
   -webkit-background-clip: text;
   text-transform: uppercase;
-  font-size: 80px;
+  font-size: 40px;
   margin: 10px 0;
   font-size: auto;
 }
@@ -91,9 +95,6 @@
   cursor: pointer;
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
-}
-html{
-  overflow-x: auto;
 }
 
 @keyframes glitch {

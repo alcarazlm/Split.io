@@ -15,14 +15,15 @@
 
 .card {
   width: 320px;
-  padding: 20px;
+  justify-content: center;
+  /* padding: 20px; */
   border: 1px solid #c9c9c9;
   text-align: center;
 
 }
-#root > div > div {
+/* #root > div > div {
   display: inline-block;
-}
+} */
 
 /* .card:hover {
   transform: scale(1.25, 1.25);

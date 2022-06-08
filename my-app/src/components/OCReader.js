@@ -19,15 +19,17 @@ function OcrReader({ onReadOcrData, onRemoveClicked }) {
     const [selectedImage, setSelectedImage] = useState(null)
     const [ocrState, setOcrState] = useState(STATUSES.IDLE)
     const [data, setData] = useState(null);
+    const [wait, setWait] = useState(false);
     const worker = createWorker();
     const [name, setName] = useState("");
 
 
     const readImageText = async () => {
+        setWait(true);
         const formData = new FormData();
         console.log(selectedImage);
         formData.append("image", selectedImage);
-        formData.append("client_id", "Test" );
+        formData.append("client_id", "roberthu_juidKEDppK_20220706" );
         const val = axios.post('https://ocr.asprise.com/api/v1/receipt', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -107,6 +109,8 @@ function OcrReader({ onReadOcrData, onRemoveClicked }) {
         });
 
     }
+    console.log(ocrState);
+    console.log(wait);
     return (
         <div>
             <div className="content">
@@ -133,6 +137,7 @@ function OcrReader({ onReadOcrData, onRemoveClicked }) {
                         <Link to='/OCRInfo' state={{ from: data }}>
                             <button className='button-55' >Continue</button>
                         </Link>
+                        {wait ? <h3>Wait 5 seconds...</h3> : <div></div>}
                     </div>
                     :
                     // <>

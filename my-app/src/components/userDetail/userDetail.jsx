@@ -12,8 +12,10 @@ import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, TouchableO
 import Modal from 'react-modal';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+// import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import './userDetail.css';
 const _ = require('lodash'); 
+
 /**
  * Define UserDetail, a React componment of CS142 project #5
  */
@@ -54,6 +56,7 @@ class UserDetail extends React.Component {
                     let user = doc.data();
                     let holdUsers = this.state.allUsers;
                     holdUsers.push(user);
+                    this.setState({allUsers: holdUsers})
 
                 } else {
                     // this.setState({user: null});
@@ -189,33 +192,33 @@ class UserDetail extends React.Component {
                 rr = this.state.recent_receipts.map((r,i) => {
                     // console.log(r);
                     return(
-                        <Link to={`/receipt/${r.ruid}`} state={{id: r.ruid}} key={i}>
+                        <Link to={`/receipt/${r.ruid}`} state={{uid: user.uid,id: r.ruid}} key={i}>
                             {/* <Card> */}
-                            <Grid item component={Card} xs>
+                            <Grid item component={Card} container>
                                 {/* <CardActionArea> */}
-                                    <CardHeader 
-                                    title={
-                                    // <Typography align='space-between'>{r.location}</Typography> }
-                                    <div className='receipt'>
+                                    {/* <CardHeader 
+                                    title={ */}
+                                    {/* // <Typography align='space-between'>{r.location}</Typography> } */}
+                                    <div className='receipt' >
                                         {/* <h3> */}
-                                            <Text>{r.location}</Text>
+                                        <h3>{r.location}</h3>
                                         {/* </h3> */}
                                         <div className='receiptInfo'>
                                             {/* <h4> */}
-                                            <Text>
+                                            <h5>
                                                 Subtotal: {formatter.format(r.subtotal)}
-                                            </Text>
+                                            </h5>
                                             {/* </h4> */}
-                                            <br></br>
+                                            {/* <br></br> */}
                                             {/* <h6> */}
-                                            <Text>
+                                            <h5>
                                                 Tax: {formatter.format(r.tax)}
-                                            </Text>
+                                            </h5>
                                             {/* </h6> */}
                                         </div>
                                     </div>
-                                    }
-                                    />
+                                    {/* } */}
+                                    {/* /> */}
                                 {/* </CardActionArea> */}
 
                             </Grid>
@@ -275,7 +278,7 @@ class UserDetail extends React.Component {
                 {/* <label class="logoutLblPos">
                 <input name="submit2" type="submit" id="submit2" value="log out">
                 </label> */}
-                {this.state.active ? <Button onClick={() => {this.signout();}} component={Link} to="/">Sign out</Button> : <Button component={Link} to="/login">Sign in!</Button>}
+                {/* {this.state.active ? <Button onClick={() => {this.signout();}} component={Link} to="/">Sign out</Button> : <Button component={Link} to="/login">Sign in!</Button>} */}
             </form>
             </div>
             <Card className='title'>
@@ -287,8 +290,9 @@ class UserDetail extends React.Component {
                 <Grid container
                 spacing={0}
                 direction="column"
-                alignItems="center"
-                justifyContent="center">
+                alignItems="stretch"
+                justifyContent="center"
+                width='350px'>
                     {rr ? rr : 
                     (
                         <div>

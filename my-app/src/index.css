@@ -105,6 +105,11 @@ div {
       #44107a 29%,
       #ff1361 67%,
       #fff800 100%);
+  background-image: -webkit-linear-gradient(-225deg,
+  #231557 0%,
+  #44107a 29%,
+  #ff1361 67%,
+  #fff800 100%); /* Safari 5.1+, Chrome 10+ */  
   align-items: center;
   justify-content: center;
   background-size: auto auto;

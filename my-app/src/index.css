@@ -112,6 +112,7 @@ div {
   background-size: 200% auto;
   color: #fff;
   margin-top: auto;
+  padding-top: 10%;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

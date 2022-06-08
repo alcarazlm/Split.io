@@ -128,7 +128,7 @@ class ReceiptObject extends React.Component {
       items = chosen_receipt.items.map((item, index) => (
           <div key={index} style={{alignContent: 'center', alignItems: 'center'}}>
             <TouchableOpacity style={{ marginTop: 10, height: 40, width: '80%', borderRadius: 12, backgroundColor: '#E6E6FA', justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 15, alignItems: 'center' }}>
-              <Text style={{ color: '#778899', fontSize: 18 }}> {item.item_name} ${item.price}</Text>
+              <Text style={{ color: '#778899', fontSize: 18 }}> {item.item_name} {formatter.format(item.price)}</Text>
               {/* <Text style={{ color: 'white', fontSize: 18 }}>{item.isSelected ? 'selected' : 'not selected'}</Text> */}
               {/* <AvatarGroup>
               {this.state.userItems[index] ?

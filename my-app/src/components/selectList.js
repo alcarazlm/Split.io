@@ -1,14 +1,14 @@
-import React, { Component, useEffect } from 'react';
-import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, TouchableOpacity } from 'react-native-web';
+import React, { Component } from 'react';
+import { ScrollView, View, Text, StatusBar, TouchableOpacity } from 'react-native-web';
 import Carousel from 'react-elastic-carousel';
 import firebase from "firebase/app";
-import { Card, CardHeader, CardActionArea, CardMedia, Grid, CardActions, Button, Typography, TextField } from '@material-ui/core';
-import { auth, db } from '../firebase';
+import { Grid, Button, Typography, TextField } from '@material-ui/core';
+import { db } from '../firebase';
 import Modal from 'react-modal';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Link } from 'react-router-dom';
-import Payment from './paymentPage';
+// import Payment from './paymentPage';
 import { Avatar, AvatarGroup } from '@mui/material';
 import './selectList.css'
 import { useLocation } from "react-router-dom";
@@ -57,15 +57,10 @@ class SelectList extends Component {
         this.setState({ showModal: false });
     }
     onClicker2(curr, next) {
-        // console.log(curr);
-        // console.log(next);
         this.setState({index: curr});
-        const { receipt, users, count } = this.state;
+        const { receipt } = this.state;
         const { personData } = this.state;
         let totalPrice = 0.0;
-        // for (let j = 0; j < receipt.items.length; j++) {
-        //     receipt.items[j].isSelected = false;
-        // }
         if (personData[curr].selectedItems.length > 0) {
             for (let j = 0; j < receipt.items.length; j++) {
                 if (personData[curr].selectedItems.includes(j)) {
@@ -88,7 +83,6 @@ class SelectList extends Component {
 
     componentDidMount() {
         const {location} = this.props;
-        // console.log(location.state.from);
         let ruid = location.state.from;
         this.setState({receipt_uid: ruid});
         db.collection('receipts').doc(ruid).get().then((querySnapshot) => {
@@ -97,15 +91,9 @@ class SelectList extends Component {
             this.setState({items: receipt.items});
             this.setState({receipt: receipt});
         })
-        // const {receiptid} = this.props.location  ? state
-        // console.log(receiptid);
         firebase.auth().onAuthStateChanged((user) => {
-            // console.log('here');
             if (user) {
                 var uid = user.uid;
-                // console.log('here');
-                // console.log(uid);
-                // db.collection('users').doc(uid)
                 db.collection("users").where('uid', '==', uid).get().then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         var currUser = doc.data();
@@ -114,17 +102,13 @@ class SelectList extends Component {
                         currUser.friends.map((f, j) => {
                             db.collection("users").doc(f).get().then((querySnapshot) => {
                                 let friend = querySnapshot.data();
-                                // console.log(friend)
                                 var holdFriends = this.state.user_friends
                                 holdFriends.push(friend);
                                 this.setState({ user_friends: holdFriends});
                                 this.setState({uf_copy: holdFriends});
-                                // console.log(this.state.user_friends)
-                                // return friend;
                             }).catch((err) => {
                                 this.setState({ login_error: err.message });
                             });
-                            // console.log(this.state.user_friends)
                         });
                         currUser.receipts.map((r, j) => {
                             db.collection("receipts").doc(r).get().then((querySnapshot) => {
@@ -136,7 +120,6 @@ class SelectList extends Component {
                                 this.setState({ login_error: err.message });
                             });
                         });
-                        // window.location.href = `#/users/${currUser.uid}`;
                     });
                 }).catch((err) => {
                     this.setState({ login_error: err.message });
@@ -144,18 +127,9 @@ class SelectList extends Component {
             } else {
                 let currUser = {first_name: "You", last_name:"", friends:[], receipts:[]}
                 this.setState({ user: currUser });
-                // this.setState({})
                 this.setState({ users: [...this.state.users, currUser] })
             }
         });
-        // let arr = this.state.receipt.items.map((item, index) => {
-        //     item.isSelected = false
-        //     return { ...item };
-
-        // })
-        // let tempReceipt = this.state.receipt;
-        // tempReceipt.items = arr;
-        // this.setState({ receipt: tempReceipt });
     }
 
     goToLoad = () => {
@@ -165,13 +139,8 @@ class SelectList extends Component {
 
 
     selectionHandler = (ind) => {
-        // console.log(ind);
-        // this.setState({})
         let holdUserItems = this.state.userItems;
-        // let users = this.state.users;
         let index = this.state.index;
-        // console.log(index);
-        // let items = this.state.items
         holdUserItems[ind] ??= [];
         if (holdUserItems[ind].includes(index)) {
             holdUserItems[ind] = holdUserItems[ind].filter(function (i) {
@@ -181,7 +150,6 @@ class SelectList extends Component {
             holdUserItems[ind].push(index);
         }
         this.setState({userItems: holdUserItems});
-        // console.log(holdUserItems);
 
         const { personData, count, selectedItems, receipt } = this.state;
         let arr = receipt.items.map((item, index) => {
@@ -204,10 +172,6 @@ class SelectList extends Component {
             personData[count].selectedItems = [...its];
 
         }
-        // console.log(personData[count].selectedItems)
-        // console.log()
-
-        // this.setState({ receipt.items: arr });
         this.setState({ personData: pp });
 
 
@@ -224,7 +188,6 @@ class SelectList extends Component {
     }
     
     containsObject(obj, list) {
-        // console.log(list);
         var i;
         for (i = 0; i < list.length; i++) {
             if (list[i] === obj) {
@@ -264,12 +227,9 @@ class SelectList extends Component {
     calcTotals = () => {
         let holdInfo = this.state.userItems;
         let receipt = this.state.receipt;
-        // console.log(receipt)
-        // console.log(typeof receipt.tax);
         let holdUsers = this.state.users;
         let user;
         let holdData = this.state.receipt.items;
-        // console.log(holdUsers);
         for (var u in this.state.userItems) {
             for (var i of holdInfo[u]) {
                 holdUsers[i].total ??= 0.0
@@ -280,47 +240,22 @@ class SelectList extends Component {
             holdUsers[k].total += (holdUsers[k].total / receipt.subtotal) * (receipt.tax + receipt.tip)   
         }
         this.setState({users: holdUsers});
-        // console.log(this.state.users);
-//         let holdInfo = this.state.userItems;
-//         // console.log(holdInfo);
-//         let holdUsers = this.state.users;
-//         let user;
-//         let holdData = this.state.receipt.items;
-//         for (var u in this.state.userItems) {
-//             for (var i of holdInfo[u]) {
-//                 // console.log(i);
-//                 holdUsers[i].total ??= 0.0
-//                 holdUsers[i].total += holdData[u].price / holdInfo[u].length;
-//             }
-//         }
-//         this.setState({users: holdUsers});
-//         console.log(this.state.users);
     }
     render() {
         const { user, user_friends, users, isLoading, personData, items, receipt } = this.state;
-        // console.log(items);
-        // console.log(receipt);
 
         let friend_list;
-        // console.log(user_friends);
         if (user_friends !== []) {
             friend_list = user_friends.map((f, i) => {
                 return (
                         <TouchableOpacity onPress={() => {
-                            // if f.isSelected
                             this.addtoUsers(f)
                         }} style={{ marginTop: 20, height: 50, width: '80%', borderRadius: 12, backgroundColor: (f.isSelected ? 'green' : 'gray'), justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 25, alignItems: 'center' }} key={i}>
                             <Text style={{ color: 'white', fontSize: 18 }}> {`${f.first_name} ${f.last_name}`}</Text>
-                            {/* <Text style={{ color: 'white', fontSize: 18 }}>{f.isSelected ? 'selected' : 'not selected'}</Text> */}
                         </TouchableOpacity>
-
-                    // <div></div>
                 );
             });
         }
-        // const location = useLocation();
-        // const {receiptid} = location.state;
-        // console.log(users);
         return (
             <View style={{ flex: 1 }}>
                 <Modal
@@ -347,27 +282,20 @@ class SelectList extends Component {
                         <h3>
                             Friends on the Receipt
                         </h3>
-                        {/* <ul> */}
                         {users.map((person,k) => (
-                            // <li key={k}>
                                 <TouchableOpacity style={{ marginTop: 20, height: 50, width: '80%', borderRadius: 12, backgroundColor: 'gray', justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 25, alignItems: 'center' }} onPress={() => this.removeUser(person)} key={k}>
                                     <Text style={{ color: 'white', fontSize: 18 }}> {person.first_name} {person.last_name}</Text>
                                 </TouchableOpacity>
-                            // </li>
                         ))}
-                        {/* </ul> */}
                     </Grid>
                 </Modal>
                 <StatusBar barStyle='dark-content' />
                 <ScrollView contentContainerStyle={{ flex: 1 }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         {receipt ? receipt.items.map((item, index) => {
-                            // console.log(this.state.userItems[index]);
                             return (
-                                // <div key={index}>
                                     <TouchableOpacity onPress={() => this.selectionHandler(index)} style={{ marginTop: 20, height: 50, width: '80%', borderRadius: 12, backgroundColor: '#E6E6FA', justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 25, alignItems: 'center' }} key={index}>
                                         <Text style={{ color: '#778899', fontSize: 18 }}> {item.item_name} {formatter.format(item.price)}</Text>
-                                        {/* <Text style={{ color: 'white', fontSize: 18 }}>{item.isSelected ? 'selected' : 'not selected'}</Text> */}
                                         <AvatarGroup>
                                         {this.state.userItems[index] ?
                                          
@@ -396,7 +324,6 @@ class SelectList extends Component {
                             }>
 
                             {this.state.users.map((person, l) => (
-                                // console.log(person.)
                                 <div key={l}>
                                     <h3>  
                                         {person.first_name} {person.last_name} 

@@ -2,9 +2,7 @@ import React from 'react';
 import {
   Typography, Grid, Paper, TextField, Button
 } from '@material-ui/core';
-// import axios from 'axios';
 import { auth, db } from '../firebase';
-// import { response } from 'express';
 
 class Register extends React.Component {
     constructor(props) {

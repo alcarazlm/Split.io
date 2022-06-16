@@ -1,10 +1,7 @@
 import React from 'react';
-import background from '../imgs/backgroundAspect.jpeg'
 import { Grid, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-// import { Card, Typography } from '@material-ui/core';
 import './ImageZero.css'
-import splitIcon from '../imgs/IMG_5761.jpg';
 import Confetti from 'react-confetti'
 import { useWindowDimensions } from 'react-native';
 
@@ -12,8 +9,6 @@ import { useWindowDimensions } from 'react-native';
 
 function IntroPage() {
     const { height, width } = useWindowDimensions();
-    // console.log("Width", width);
-    // console.log("Height", height);
     return (
 
         <div className='content' style={{height: {height}, width: {width}}}>

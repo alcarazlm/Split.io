@@ -1,13 +1,12 @@
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { createWorker } from "tesseract.js"
 import { Link } from 'react-router-dom';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { IconButton } from '@mui/material'
 import axios from "axios";
-import { auth, db } from '../firebase';
+import { db } from '../firebase';
 import './OCReader.css';
 
-// OCR Statuses
 const STATUSES = {
     IDLE: "",
     FAILED: "Failed to perform OCR",
@@ -140,28 +139,7 @@ function OcrReader({ onReadOcrData, onRemoveClicked }) {
                         {wait ? <h3>Wait 5 seconds...</h3> : <div></div>}
                     </div>
                     :
-                    // <>
-                    //     <p>Upload an image to process</p>
-                    // <input
-                    //     type="file"
-                    //     name="ocr-image"
-                    //     onChange={(event) => {
-                    //         setSelectedImage(event.target.files[0])
-                    //     }}
-                    // />
                     <>
-                        {/* <Button variant="contained" component="label" color="primary">
-                            <PhotoCameraIcon>
-                                <input
-                                accept="image/*"
-                                // className={classes.input}
-                                // style={{ display: 'none' }}
-                                // id="raised-button-file"
-                                hidden
-                                type="file"
-                                />
-                            </PhotoCameraIcon>
-                        </Button> */}
                         <input accept="image/*" id="icon-button-file" type="file" hidden onChange={(event) => {
                             setSelectedImage(event.target.files[0])
                         }} />

@@ -15,25 +15,14 @@ function PaymentPage() {
     const colors = [`#556b2f`, `#bdb76b`, `#006400`, `#8fbc8f`, `#adff2f`, `#556b2f`, `#bdb76b`, `#006400`, `#8fbc8f`, `#adff2f`, `#556b2f`, `#bdb76b`, `#006400`, `#8fbc8f`, `#adff2f`];
     const location = useLocation();
     const { from } = location.state;
-    // var active_user = false;
     const [active_user, setActiveUser] = useState(false);
     const [user_id, setUserID] = useState('');
-    // var user_id = '';
-    // console.log(from);
-    // console.log("State: ", from);
-    // const from = from;
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
-
-        // These options are needed to round to whole numbers if that's what you want.
-        //minimumFractionDigits: 0, // (from suffices for whole numbers, but will print 2500.10 as $2,500.1)
-        //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
     });
     firebase.auth().onAuthStateChanged((user) => {
-        // console.log(user);
         if (user) {
-            // var uid = user.uid;
             setActiveUser(true);
             // user_id = uid;
             setUserID(user.uid)
@@ -41,7 +30,6 @@ function PaymentPage() {
             // active_user = f
         }
     });
-    // console.log(from.users);
     let users = from.users;
     let rUsers = {}
     users.map((u) => {
@@ -62,27 +50,7 @@ function PaymentPage() {
             });
 
         }
-        // rUsers[u] = u.total;
     });
-    // console.log(rUsers);
-    // db.collection('receipts').get().then((snapshot) => {
-    //     snapshot.forEach(doc => {
-    //         if (doc.exists) {
-    //             let receipt = doc.data();
-    //             let holdUsers = allReceipts;
-    //             holdUsers.push(receipt);
-    //             setAllReceipts(holdUsers);
-
-    //         } else {
-    //             // this.setState({user: null});
-    //             console.log("No data");
-    //         }
-
-    //     })
-    // }).catch((err) => {
-    //     this.setState({login_error: err.message});
-    // });
-    // console.log(users);
     users.map((user) => {
         // console.log(user);
         rUsers[user.uid] = user.total;
@@ -92,12 +60,8 @@ function PaymentPage() {
         'users' : rUsers
     });
     function handleVenmo(id, amount, message) {
-        window.open(`https://venmo.com/${id}?txn=pay&note=${message}&amount=${amount}`);
+        window.open(`https://venmo.com/${id}?txn=request&note=${message}&amount=${amount}`);
     }
-    // console.log(active_user)
-    // console.log("State: ", from);
-    // console.log(from.users);
-    // console.log(from.state.users);
     return (
 
         <div style={{display: 'grid',  alignItems: 'center', gridAutoRows: 'auto', justifyContent: 'space-between'}} className='content'>
@@ -111,8 +75,6 @@ function PaymentPage() {
                 </h3>
                 <Grid>
                 {from.users.map((item, j) => {
-
-                    // console.log(item);
                     return (
                         <div key={j} >
                             <ul display='inline'>
@@ -120,9 +82,7 @@ function PaymentPage() {
                                     <CardHeader className="card"
                                         action={item.venmo ? 
                                             <div>
-                                                {/* <Button onClick={() => {handleVenmo(item.venmo, item.total, from.receipt.location)}}> */}
-                                                    <img src={VenmoImage} onClick={() => {handleVenmo(item.venmo, item.total, from.receipt.location)}} alt="venmo logo" style={{ width: '50px', height: '50px', justifyContent: 'flex-start'}}/>
-                                                {/* </Button> */}
+                                                <img src={VenmoImage} onClick={() => {handleVenmo(item.venmo, item.total, from.receipt.location)}} alt="venmo logo" style={{ width: '50px', height: '50px', justifyContent: 'flex-start'}}/>
 
                                             
                                             {/* <PayPalButton style={{
@@ -147,9 +107,6 @@ function PaymentPage() {
                                         title={`${item.first_name} ${item.last_name}`}
                                         subheader={`Cost: ${formatter.format(item.total)}`}
                                     />
-                                    {/* <CardActions>
-
-                                    </CardActions> */}
                                 </Card>
                             </ul>     
                         </div>
@@ -158,9 +115,6 @@ function PaymentPage() {
                     )}
                 </Grid>
                 </Paper>
-            {/* <Button style={{ marginLeft: '500px', marginRight: '500px', backgroundColor: '#3D95CE' }} variant="contained" component={Link} to="https://venmo.com/">
-                Venmo!
-            </Button> */}
             {active_user ? <Button style={{
                 position: 'relative',
                 marginTop: '2%',

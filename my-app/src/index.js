@@ -10,16 +10,11 @@ import DndPage from './components/DndPage';
 import MockReceipt from './components/mockReceipt';
 import Login from "../src/components/login";
 import Register from  "../src/components/register"
-// import LogMeIn from './components/logMeIn';
-import Split from './App';
-import reportWebVitals from './reportWebVitals';
 import SelectList from './components/selectList';
 import UserDetail from './components/userDetail/userDetail';
 import ReceiptObject from './components/receipts/receipt';
-import ReceiptUpload from './components/receiptUpload';
 import OCR from './components/testjson';
 import OcrReader from './components/OCReader';
-import { Button } from '@material-ui/core';
 
  
 const root = ReactDOM.createRoot(document.getElementById('root'));

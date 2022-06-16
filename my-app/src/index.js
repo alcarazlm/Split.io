@@ -6,7 +6,6 @@ import { Route, Routes } from "react-router-dom";
 import ReceiptCam from './components/ReceiptCam';
 import IntroPage from './components/IntroPage.jsx';
 import PaymentPage from './components/paymentPage.jsx';
-import DndPage from './components/DndPage';
 import MockReceipt from './components/mockReceipt';
 import Login from "../src/components/login";
 import Register from  "../src/components/register"
@@ -25,7 +24,6 @@ root.render(
     <Route path="/camera/done" element={<OcrReader />} />
     <Route path="/login" element={<Login/>}/>
     <Route path="/camera" element={<ReceiptCam />} />
-    <Route path='/select' element={<DndPage />} />
     <Route path='/users/:userId' element={<UserDetail/>}/>
     <Route path='/receipt/:receiptId' element={<ReceiptObject/>}/>
     <Route path='/pay' element={<PaymentPage />} />
